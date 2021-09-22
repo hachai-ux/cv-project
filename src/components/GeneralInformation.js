@@ -82,7 +82,6 @@ class GeneralInformation extends Component {
                 
             return (
                 <div>
-                    
                     <p>Name: {name}</p>
                     <p>Email: {email}</p>
                     <p>Phone Number: {phoneNumber}</p>

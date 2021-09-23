@@ -63,6 +63,7 @@ class EducationalExperience extends Component {
     }
 
 
+
     render() {
 
         const {schoolName, studyTitle, studyDateFrom, studyDateTo, isSubmitted } = this.state;
@@ -91,7 +92,7 @@ class EducationalExperience extends Component {
                         <button type="submit">
                             Submit
                         </button>
-                        <button onClick={this.props.removeSection}type="button">
+                        <button onClick={this.props.remove} id={this.props.id} type="button">
                             Delete
                         </button>
                     </form>
@@ -120,3 +121,5 @@ class EducationalExperience extends Component {
 }
 
 export default EducationalExperience;
+
+//create list here?

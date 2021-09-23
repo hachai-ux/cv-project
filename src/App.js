@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GeneralInformation from "./components/GeneralInformation";
 import EducationalExperience from "./components/EducationalExperience";
+import uniqid from "uniqid";
 
 class App extends Component {
 
@@ -8,35 +9,42 @@ class App extends Component {
     super();
 
     this.state = {
-      educationalExperienceSections : 0
+      renderChild: true,
+      keyList: [],
     }
   }
 
+
   addEducationalExperienceSections = () => {
+    //create key when clicking on add button
+    const id = uniqid();
     this.setState({
-      educationalExperienceSections: this.state.educationalExperienceSections+1
-    })
+      keyList: this.state.keyList.concat(id),
+    });
   }
 
-  removeEducationalExperienceSection = (e) => {
-   
+  removeEEComponent = (e) => {
+    //non-mutating state change to remove component
+    this.setState({keyList: this.state.keyList.filter(id => id!== e.target.id)})
   }
  
   render() {
     
-    //count number of educational experience sections
-    const educationalExperience = [];
-    for (let i = 0; i < this.state.educationalExperienceSections; i++){
-      educationalExperience.push(<EducationalExperience removeSection = {this.removeEducationalExperienceSection} key = {i} number ={i} />)
-    }
-    console.log(educationalExperience);
+    //function and key passed down as prop
+    //EESections created/mapped for keyList
+    //Components are created from keyList and then put into the return
+
+    const educationalExperienceSections = this.state.keyList.map((id) => {
+      return <EducationalExperience remove={this.removeEEComponent} key = {id} id = {id} />
+    })
+
 
     return (
     <div className="App">
       <h1>General Information</h1>
       <GeneralInformation />
         <h1>Educational Experience</h1>
-         {educationalExperience}
+         {educationalExperienceSections}
         <button onClick={this.addEducationalExperienceSections}>Add</button>
        
     </div>

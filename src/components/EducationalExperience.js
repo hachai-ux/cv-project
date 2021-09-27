@@ -1,44 +1,28 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
  
-class EducationalExperience extends Component {
-    constructor(props) {
-        super(props);
+const EducationalExperience = (props) => {
+    
+    const [schoolName, setSchoolName] = useState('');
+    const [studyTitle, setStudyTitle] = useState('');
+    const [studyDateFrom, setStudyDateFrom] = useState('');
+    const [studyDateTo, setStudyDateTo] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    
 
-        this.state = {
-            
-                schoolName: '',
-                studyTitle: '',
-                studyDateFrom: '',
-                studyDateTo: '',
-                isSubmitted: false,
-          
-            
-            
-        };
 
-    }
-
-    handleChange = (e) => {
+    const handleChange = (e) => {
         switch (e.target.id) {
             case 'school-name':
-                this.setState({
-                    schoolName: e.target.value,
-                });
+                setSchoolName(e.target.value);
             break;
             case 'study-title':
-                this.setState({
-                    studyTitle: e.target.value,
-                });
+                setStudyTitle(e.target.value);
              break;
             case 'study-date-from':
-                this.setState({
-                    studyDateFrom: e.target.value,
-                });
+                setStudyDateFrom(e.target.value);
                 break;
             case 'study-date-to':
-                this.setState({
-                    studyDateTo: e.target.value,
-                });
+                setStudyDateTo(e.target.value);
                 break;
             default:
                 break;
@@ -47,52 +31,42 @@ class EducationalExperience extends Component {
         
     }
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            isSubmitted: true,
-        })
+        setIsSubmitted(true);
     }
 
 
-    onEdit = (e) => {
+    const onEdit = (e) => {
         e.preventDefault();
-        this.setState({
-            isSubmitted: false,
-        })
+        setIsSubmitted(false);
     }
-
-
-
-    render() {
-
-        const {schoolName, studyTitle, studyDateFrom, studyDateTo, isSubmitted } = this.state;
 
         
         if(isSubmitted === false){
             return (
                 <div>
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={onSubmit}>
                         <label htmlFor="school-name">School Name:
-                            <input onChange={this.handleChange} value={schoolName} type="text" id="school-name" />
+                            <input onChange={handleChange} value={schoolName} type="text" id="school-name" />
                         </label>
 
                         <label htmlFor="study-title">Title of Study:
-                        <input onChange={this.handleChange} value={studyTitle} type="text" id="study-title" />
+                        <input onChange={handleChange} value={studyTitle} type="text" id="study-title" />
                         </label>
                             
                             <label htmlFor="study-date-from">From:
-                        <input onChange={this.handleChange} value={studyDateFrom} type="date" id="study-date-from"/>
+                        <input onChange={handleChange} value={studyDateFrom} type="date" id="study-date-from"/>
                         </label>
 
                         <label htmlFor="study-date-to">To:
-                        <input onChange={this.handleChange} value={studyDateTo} type="date" id="study-date-to"/>
+                        <input onChange={handleChange} value={studyDateTo} type="date" id="study-date-to"/>
                         </label>
 
                         <button type="submit">
                             Submit
                         </button>
-                        <button onClick={this.props.remove} id={this.props.id} type="button">
+                        <button onClick={props.remove} id={props.id} type="button">
                             Delete
                         </button>
                     </form>
@@ -110,7 +84,7 @@ class EducationalExperience extends Component {
                     <p>From: {studyDateFrom}</p>
                     <p>To: {studyDateTo}</p>
                     
-                    <button onClick={this.onEdit} type="button">
+                    <button onClick={onEdit} type="button">
                             Edit
                         </button>
                     
@@ -118,7 +92,7 @@ class EducationalExperience extends Component {
             )
         }
     }
-}
+
 
 export default EducationalExperience;
 

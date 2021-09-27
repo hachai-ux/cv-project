@@ -25,12 +25,12 @@ const App = () => {
 
   const removeEEComponent = (e) => {
     //non-mutating state change to remove component
-    setKeyListEE.filter(id => id !== e.target.id);
+    setKeyListEE(keyListEE.filter(id => id !== e.target.id))
   }
 
   const removePEComponent = (e) => {
     //non-mutating state change to remove component
-    setKeyListPE.filter(id => id!== e.target.id)
+    setKeyListPE(keyListPE.filter(id => id!== e.target.id))
   }
  
     

@@ -1,50 +1,31 @@
-import React, {Component} from "react";
+import React, { setState } from "react";
  
-class PracticalExperience extends Component {
-    constructor(props) {
-        super(props);
+const PracticalExperience = (props) => {
+  
+    const [companyName, setCompanyName] = setState('');
+    const [positionTitle, setPositionTitle] = setState('');
+    const [mainTasks, setMainTasks] = setState('');
+    const [dateFrom, setDateFrom] = setState('');
+    const [dateTo, setDateTo] = setState('');
+    const [isSubmitted, setIsSubmitted] = setState(false);
 
-        this.state = {
-            
-                companyName: '',
-                positionTitle: '',
-                mainTasks: '',
-                dateFrom: '',
-                dateTo: '',
-                isSubmitted: false,
-          
-            
-            
-        };
 
-    }
-
-    handleChange = (e) => {
+    const handleChange = (e) => {
         switch (e.target.id) {
             case 'company-name':
-                this.setState({
-                    companyName: e.target.value,
-                });
+                setCompanyName(e.target.value);
             break;
             case 'position-title':
-                this.setState({
-                    positionTitle: e.target.value,
-                });
+                 setPositionTitle(e.target.value);
                 break;
             case 'main-tasks':
-                this.setState({
-                    mainTasks: e.target.value,
-                });
+                 setMainTasks(e.target.value);
              break;
             case 'date-from':
-                this.setState({
-                    dateFrom: e.target.value,
-                });
+                 setDateFrom(e.target.value);
                 break;
             case 'date-to':
-                this.setState({
-                    dateTo: e.target.value,
-                });
+                 setDateTo(e.target.value);
                 break;
             default:
                 break;
@@ -53,56 +34,47 @@ class PracticalExperience extends Component {
         
     }
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            isSubmitted: true,
-        })
+        setIsSubmitted(true);
     }
 
 
-    onEdit = (e) => {
+    const onEdit = (e) => {
         e.preventDefault();
-        this.setState({
-            isSubmitted: false,
-        })
+        setIsSubmitted(true);
     }
 
-
-
-    render() {
-
-        const {companyName, positionTitle, mainTasks, dateFrom, dateTo, isSubmitted } = this.state;
 
         
         if(isSubmitted === false){
             return (
                 <div>
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={onSubmit}>
                         <label htmlFor="company-name">Company Name:
-                            <input onChange={this.handleChange} value={companyName} type="text" id="company-name" />
+                            <input onChange={handleChange} value={companyName} type="text" id="company-name" />
                         </label>
 
                         <label htmlFor="position-title">Title of Position:
-                        <input onChange={this.handleChange} value={positionTitle} type="text" id="position-title" />
+                        <input onChange={handleChange} value={positionTitle} type="text" id="position-title" />
                         </label>
 
                         <label htmlFor="main-tasks">Main Tasks:
-                        <textarea onChange={this.handleChange} value={mainTasks} id="main-tasks" />
+                        <textarea onChange={handleChange} value={mainTasks} id="main-tasks" />
                         </label>
                             
                             <label htmlFor="date-from">From:
-                        <input onChange={this.handleChange} value={dateFrom} type="date" id="date-from"/>
+                        <input onChange={handleChange} value={dateFrom} type="date" id="date-from"/>
                         </label>
 
                         <label htmlFor="date-to">To:
-                        <input onChange={this.handleChange} value={dateTo} type="date" id="date-to"/>
+                        <input onChange={handleChange} value={dateTo} type="date" id="date-to"/>
                         </label>
 
                         <button type="submit">
                             Submit
                         </button>
-                        <button onClick={this.props.remove} id={this.props.id} type="button">
+                        <button onClick={props.remove} id={props.id} type="button">
                             Delete
                         </button>
                     </form>
@@ -121,7 +93,7 @@ class PracticalExperience extends Component {
                     <p>From: {dateFrom}</p>
                     <p>To: {dateTo}</p>
                     
-                    <button onClick={this.onEdit} type="button">
+                    <button onClick={onEdit} type="button">
                             Edit
                         </button>
                     
@@ -129,7 +101,7 @@ class PracticalExperience extends Component {
             )
         }
     }
-}
+
 
 export default PracticalExperience;
 

@@ -1,35 +1,23 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import '../styles/style.css';
  
-class GeneralInformation extends Component {
-    constructor() {
-        super();
+const GeneralInformation = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
-        this.state = {
-            name: '',
-            email: '',
-            phoneNumber: '',
-            isSubmitted: false,
-        }
 
-    }
-
-    handleChange = (e) => {
+    const handleChange = (e) => {
         switch (e.target.id) {
             case 'name':
-                this.setState({
-                    name: e.target.value,
-                });
+                setName(e.target.value);
             break;
             case 'email':
-                this.setState({
-                    email: e.target.value,
-                });
+                setEmail(e.target.value);
              break;
             case 'phone-number':
-                this.setState({
-                    phoneNumber: e.target.value,
-                });
+                setPhoneNumber(e.target.value);
                 break;
             default:
                 break;
@@ -38,37 +26,30 @@ class GeneralInformation extends Component {
         
     }
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            isSubmitted: true,
-        })
+        setIsSubmitted(true);
     }
 
 
-    onEdit = (e) => {
+    const onEdit = (e) => {
         e.preventDefault();
-        this.setState({
-            isSubmitted: false,
-        })
+        setIsSubmitted(false);
     }
 
-    render() {
-
-        const { name, email, phoneNumber, isSubmitted } = this.state;
-
+    
         if(isSubmitted === false){
             return (
                 <div>
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={onSubmit}>
                         <label htmlFor="name">Name:
-                            <input onChange={this.handleChange} value={name} type="text" id="name" />
+                            <input onChange={handleChange} value={name} type="text" id="name" />
                         </label>
                         <label htmlFor="email">Email:
-                        <input onChange={this.handleChange} value={email} type="text" id="email"/>
+                        <input onChange={handleChange} value={email} type="text" id="email"/>
                         </label>
                         <label htmlFor="phone-number">Phone Number:
-                        <input onChange={this.handleChange} value={phoneNumber} type="text" id="phone-number"/>
+                        <input onChange={handleChange} value={phoneNumber} type="text" id="phone-number"/>
                         </label>
                         <button type="submit">
                             Submit
@@ -87,7 +68,7 @@ class GeneralInformation extends Component {
                     <p>Email: {email}</p>
                     <p>Phone Number: {phoneNumber}</p>
                     
-                    <button onClick={this.onEdit} type="button">
+                    <button onClick={onEdit} type="button">
                             Edit
                         </button>
                     
@@ -95,6 +76,6 @@ class GeneralInformation extends Component {
             )
         }
     }
-}
+
 
 export default GeneralInformation;
